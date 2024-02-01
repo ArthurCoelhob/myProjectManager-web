@@ -12,11 +12,11 @@ export class Project {
   description: string;
 
   @Column({ type: 'date' })
-  startDate: Date;
+  start_date: Date;
 
   constructor(name: string, description?: string, startDate?: Date) {
     this.name = name;
     this.description = description;
-    this.startDate = startDate;
+    this.start_date = startDate;
   }
 }

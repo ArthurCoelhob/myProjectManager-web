@@ -1,4 +1,3 @@
-// test-database-connection.ts
 import { createConnections, Connection } from 'typeorm';
 import { databaseConfig } from '../infrastructure/config';
 
