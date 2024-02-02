@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, Put, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Put, Delete, HttpException, HttpStatus} from '@nestjs/common';
 import { Project } from '../../../domain/entities/project/project.entity';
 import { ProjectService } from '../../../domain/services/project/project.service';
 import { CreateProjectDto } from '../../../interfaces/dtos/create-project.dto.interface';
@@ -18,7 +18,9 @@ export class ProjectController {
     }
 
     @Get(':id')
-    async getProjectById(@Param('id') id: string): Promise<Project> {
+    async getProjectById(
+        @Param('id') id: string
+    ): Promise<Project> {
         try {
             const projectId = parseInt(id, 10);
             return this.projectService.getProjectById(projectId);
@@ -28,7 +30,9 @@ export class ProjectController {
     }
     
     @Post()
-    async createProject(@Body() createProjectDto: CreateProjectDto): Promise<Project> {
+    async createProject(
+        @Body() createProjectDto: CreateProjectDto
+    ): Promise<Project> {
         try {
             const newProject = await this.projectService.createProject(createProjectDto);
             return newProject;
@@ -38,7 +42,10 @@ export class ProjectController {
     }
 
     @Put(':id')
-    async updateProject(@Param('id') id: string, @Body() updateProjectDto: CreateProjectDto): Promise<Project> {
+    async updateProject(
+        @Param('id') id: string,
+        @Body() updateProjectDto: CreateProjectDto
+    ): Promise<Project> {
         try {
             const projectId = parseInt(id, 10);
             return this.projectService.updateProject(projectId, updateProjectDto);
@@ -49,11 +56,12 @@ export class ProjectController {
     }
 
     @Delete(':id')
-    async deleteProject(@Param('id') id: string): Promise<void> {
+    async deleteProject(
+        @Param('id') id: string
+    ): Promise<void> {
         try {
             const projectId = parseInt(id, 10);
             await this.projectService.deleteProject(projectId);
-            throw new HttpException('', HttpStatus.NO_CONTENT);
         } catch (error) {
             throw new HttpException('Falha ao remover o projeto.', HttpStatus.INTERNAL_SERVER_ERROR);
         }
