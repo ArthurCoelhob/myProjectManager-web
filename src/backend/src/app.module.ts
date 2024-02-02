@@ -4,15 +4,18 @@ import { ProjectController } from './application/controllers/project/project.con
 import { Project } from './domain/entities/project/project.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfig } from './infrastructure/config';
+import { TaskService } from './domain/services/task/task.service';
+import { TaskController } from './application/controllers/task/task.controller';
+import { Task } from './domain/entities/task/task.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
       ...databaseConfig ,
         autoLoadEntities: true,
     }),
-    TypeOrmModule.forFeature([Project]),
+    TypeOrmModule.forFeature([Project, Task]),
   ],
-  controllers: [ProjectController],
-  providers: [ProjectService],
+  controllers: [ProjectController, TaskController],
+  providers: [ProjectService, TaskService],
 })
 export class AppModule {}

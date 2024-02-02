@@ -3,12 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Project } from '../../../domain/entities/project/project.entity';
 import { CreateProjectDto } from '../../../interfaces/dtos/create-project.dto.interface';
+import { Task } from 'src/domain/entities/task/task.entity';
 
 @Injectable()
 export class ProjectService {
     constructor(
         @InjectRepository(Project)
         private readonly projectRepository: Repository<Project>,
+        @InjectRepository(Task)
+        private readonly taskRepository: Repository<Task>,
     ) {}
 
     async getAllProjects(): Promise<Project[]> {
@@ -47,9 +50,16 @@ export class ProjectService {
         }
     }    
 
+    
     async deleteProject(projectId: number): Promise<void> {
         try {
             const project = await this.projectRepository.findOneOrFail({ where: { id: projectId } });
+
+            const tasks = await this.taskRepository.find({ where: { project } });
+
+            if (tasks.length > 0) {
+                await Promise.all(tasks.map(async (task) => await this.taskRepository.remove(task)));
+            }
             await this.projectRepository.remove(project);
         } catch (error) {
             throw new NotFoundException('Projeto não encontrado', error);
