@@ -51,6 +51,10 @@ Camada de Infraestrutura (Infrastructure): Responsável por configurar o banco d
         database: process.env.DB_NAME || 'project_manager_db',
         } as const;
     ```
+     caso não tenha sido configurado uma senha para o database
+    ```
+     password: process.env.DB_PASSWORD || '',
+    ```
     
     dentro de "src/backend/src/infrastructure" podemos testar a nossa conexão
    ```
