@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "d0065a12-575f-4d91-a527-f0ef4016029c",
+		"name": "MyProjectManager",
+		"description": "A plataforma web MyProjectManager permite que os usuários gerenciem seus projetos e tarefas associadas. A aplicação oferece funcionalidades para a criação, edição e remoção de projetos, bem como suas tarefas associadas.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16789155",
+		"_collection_link": "https://lively-desert-359672.postman.co/workspace/597a6273-1de4-419a-b26a-596802a8f964/collection/16789155-d0065a12-575f-4d91-a527-f0ef4016029c?action=share&source=collection_link&creator=16789155"
+	},
+	"item": [
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "GetAllProjects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"project"
+							]
+						},
+						"description": "Retorna todos os projetos cadastrados no sistema"
+					},
+					"response": []
+				},
+				{
+					"name": "GetProjectById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/project/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"project",
+								"1"
+							]
+						},
+						"description": "Retorna os detalhes de um projeto específico."
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Projeto Teste\",\n  \"description\": \"Projeto teste\",\n  \"start_date\": \"2024-01-31\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"project"
+							]
+						},
+						"description": "- Cria um novo projeto."
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProject",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Projeto Teste update\",\n  \"description\": \"Projeto teste update\",\n  \"start_date\": \"2024-01-31\",\n  \"projectId\": \"1\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/project/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"project",
+								"1"
+							]
+						},
+						"description": "- Atualiza um projeto existente."
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProject",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/project/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"project",
+								"1"
+							]
+						},
+						"description": "- Remove um projeto existente."
+					},
+					"response": []
+				}
+			],
+			"description": "### Endpoints\n\n- **GET GetAllProjects ->> localhost:3000/project**\n    - Retorna todos os projetos cadastrados no sistema.\n- **GET GetProjectById->> localhost:3000/project/{projectId}**\n    - Retorna os detalhes de um projeto específico.\n- **POST CreateProject ->> localhost:3000/project**\n    - Cria um novo projeto.\n    - Exemplo no endpoint para corpo da requisição\n- **PUT UpdateProject localhost:3000/project/{projectId}**\n    - Atualiza um projeto existente.\n    - Exemplo no endpoint para corpo da requisição\n- **DELETE /project/{projectId}**\n    - Remove um projeto existente."
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "GetAllTasks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Docker Study\",\n  \"description\": \"Estudando p evoluir\",\n  \"start_date\": \"2024-01-31\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/task/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"1"
+							]
+						},
+						"description": "\\- Busca todos as tarefas associadas a um projeto."
+					},
+					"response": []
+				},
+				{
+					"name": "GetTaskById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Docker Study\",\n  \"description\": \"Estudando p evoluir\",\n  \"start_date\": \"2024-01-31\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/task/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"1",
+								"1"
+							]
+						},
+						"description": "\\- Busca uma tarefa em específico e retorna os detalhes desse projeto."
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTask",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Tarefa Teste\",\n  \"description\": \"Descrição da tarefa de teste\",\n  \"due_date\": \"2024-02-10\",\n  \"completed\": false,\n  \"projectId\": 1\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task"
+							]
+						},
+						"description": "\\- Cria uma tarefa associada a um projeto."
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTask",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/task/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"1"
+							]
+						},
+						"description": "Deleta uma tarefa associada a um projeto."
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTask",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Atualizando task\",\n  \"description\": \"Descrição da tarefa de teste\",\n  \"due_date\": \"2024-02-10\",\n  \"completed\": false,\n  \"projectId\": 1,\n  \"id\": 1\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/task/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"1"
+							]
+						},
+						"description": "Atualiza uma tarefa associada a um projeto."
+					},
+					"response": []
+				}
+			],
+			"description": "### Endpoints\n\n\\- **GET GetAllTasks ->> localhost:3000/task/{projectId}**  \n\\- Busca todos as tarefas associadas a um projeto.\n\n\\- **GET GetTaskByID ->> localhost:3000/task/{projectId}/{taskId}**  \n\\- Busca uma tarefa em específico e retorna os detalhes desse projeto.\n\n\\- **POST CreateTask ->> localhost:3000/task**  \n\\- Cria uma tarefa associada a um projeto.  \n\\- Exemplo para corpo de requisição no endpoint\n\n\\- **DELETE DeleteTask ->> localhost:3000/task**  \n\\- Deleta uma tarefa associada a um projeto.\n\n\\- **PUT UpdateTask ->> localhost:3000/task/{taskId}**  \n\\- Atualiza uma tarefa associada a um projeto.  \n\\- Exemplo para corpo de requisição no endpoint"
+		}
+	]
+}

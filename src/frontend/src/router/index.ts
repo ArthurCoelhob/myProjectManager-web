@@ -1,4 +1,3 @@
-// router/index.ts
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import ProjectDetailPage from '@/views/ProjectDetailPage.vue';

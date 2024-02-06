@@ -46,7 +46,11 @@ export default defineComponent({
         this.projectDescription = project.description;
         this.startDate = new Date(project.start_date).toISOString().split('T')[0];
       } catch (error) {
-        console.error('Error fetching project details:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro: em carregar os detalhes das tarefas',
+        });
       }
     },
     async handleEditProject() {

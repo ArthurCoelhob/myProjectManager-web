@@ -27,7 +27,12 @@ export default {
         const response = await projectService.getAllProjects();
         this.projects = response.data;
       } catch (error) {
-        console.error('Erro ao carregar projetos:', error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro ao carregar projetos.',
+        });
+        console.error('', error.message);
       }
     },
     viewProjectDetails(projectId) {

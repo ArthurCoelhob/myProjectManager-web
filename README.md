@@ -76,14 +76,32 @@ Camada de Infraestrutura (Infrastructure): Responsável por configurar o banco d
    ```
 
 
-1. Para executar o frontend, utilize os seguintes comandos dentro da pasta "src/frontend" do projeto:
+3. Para executar o frontend, utilize os seguintes comandos dentro da pasta "src/frontend" do projeto:
 
    ```
    npm run serve
    ```
 
-2. O servidor será iniciado e estará acessível em um dos seguinte endereços:
+4. O servidor será iniciado e estará acessível em um dos seguinte endereços:
 
   ```
    https://localhost:8080
    ```
+
+### Utilização da Aplicação
+
+Após seguir os passos acima, você poderá acessar a aplicação web.
+
+### Configuração de CORS
+
+Se você encontrar problemas com CORS, você pode configurar o arquivo (src/backend/src/main.ts):
+
+   ```
+     app.use(cors({
+    origin: 'http://localhost:8080',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  }));
+   ```
+### Documentação API
+`MyProjectManager.postman_collection.json` 
