@@ -66,7 +66,6 @@ export default defineComponent({
           title: 'Sucesso!',
           text: 'Projeto editado com sucesso!',
         });
-        console.log('Projeto editado com sucesso:', response.data);
 
         this.$router.push({ name: 'ProjectDetail', params: { id: response.data.id } });
       } catch (error) {

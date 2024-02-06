@@ -11,6 +11,7 @@
 
 <script>
 import projectService from '@/services/projectService';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -32,7 +33,6 @@ export default {
           title: 'Erro!',
           text: 'Erro ao carregar projetos.',
         });
-        console.error('', error.message);
       }
     },
     viewProjectDetails(projectId) {
