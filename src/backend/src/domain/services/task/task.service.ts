@@ -40,7 +40,6 @@ export class TaskService {
 
     async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
         try {
-            console.log(createTaskDto)
             const { projectId, ...taskData } = createTaskDto;
 
 

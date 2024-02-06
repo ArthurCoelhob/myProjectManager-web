@@ -1,5 +1,5 @@
 -- Criação do banco de dados
-CREATE DATABASE project_manager_db;
+CREATE DATABASE project_manager_db WITH OWNER = seu_usuario ENCODING = 'UTF8' CONNECTION LIMIT = -1 PASSWORD = '123';
 
 -- Conectar ao banco de dados
 \c project_manager_db 123;
