@@ -28,6 +28,7 @@
 import { defineComponent } from 'vue';
 import projectService from '@/services/projectService';
 import taskService from '@/services/taskService';
+import Swal from 'sweetalert2';
 
 interface Project {
   id: number;
@@ -75,7 +76,11 @@ export default defineComponent({
           const tasksResponse = await taskService.getTasksByProjectId(projectId);
           this.tasks = tasksResponse.data as Task[];
         } catch (error) {
-          console.error('Error fetching project details:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao carregar os detalhes do projeto',
+          });
         }
       }
     },
@@ -83,8 +88,18 @@ export default defineComponent({
     try {
       await taskService.deleteTask(taskId);
       this.tasks = this.tasks.filter((task) => task.id !== taskId);
+
+      Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Tarefa deletada com sucesso!',
+        });
     } catch (error) {
-      console.error('Error deleting task:', error);
+      Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao deletar tarefa',
+          });
     }
   },
     async editTask(projectId: number, taskId: number) {

@@ -23,6 +23,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import projectService from '@/services/projectService';
+import Swal from 'sweetalert2';
 
 export default defineComponent({
   data() {
@@ -40,10 +41,20 @@ export default defineComponent({
           description: this.projectDescription,
           start_date: this.startDate,
         });
-        console.log('Projeto criado com sucesso:', response.data);
+        
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Projeto criado com sucesso!',
+        });
+
         this.$router.push({ name: 'ProjectDetail', params: { id: response.data.id } });
       } catch (error) {
-        console.error('Erro ao criar projeto:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro, por favor tenta novamente!',
+        });
       }
     },
   },

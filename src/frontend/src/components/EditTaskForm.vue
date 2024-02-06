@@ -14,6 +14,10 @@
         <label for="dueDate">Data de Vencimento:</label>
         <input type="date" id="dueDate" v-model="dueDate" />
       </div>
+       <div class="form-group">
+        <label for="completed">Concluída:</label>
+        <input type="checkbox" id="completed" v-model="completed" />
+      </div>
       <div class="form-group">
         <button @click.prevent="handleEditTask">Editar Tarefa</button>
       </div>
@@ -21,10 +25,11 @@
 </template>
   
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import taskService from '@/services/taskService';
-  import projectService from '@/services/projectService';
-  import { format } from 'date-fns';
+import { defineComponent } from 'vue';
+import taskService from '@/services/taskService';
+import projectService from '@/services/projectService';
+import { format } from 'date-fns';
+import Swal from 'sweetalert2';
   
 export default defineComponent({
   data() {
@@ -34,6 +39,7 @@ export default defineComponent({
       taskName: '',
       taskDescription: '',
       dueDate: '',
+      completed: false,
     };
   },
   async mounted() {
@@ -50,8 +56,13 @@ export default defineComponent({
         this.taskName = task.title;
         this.taskDescription = task.description;
         this.dueDate = new Date(task.due_date).toISOString().split('T')[0];
+        this.completed = task.completed;
       } catch (error) {
-        console.error('Error fetching task details:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro: em carregar os detalhes das tarefas',
+        });
       }
     },
 
@@ -59,20 +70,42 @@ export default defineComponent({
       if (this.projectId !== null && this.projectId !== undefined) {
         this.$router.push({ name: 'ProjectDetail', params: { id: this.projectId } });
       } else {
-        console.error('Erro: projectId não está definido ou é nulo.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro: projectId não está definido ou é nulo.!',
+        });
       }
     },
     async handleEditTask() {
       try {
+        if (!this.taskName || !this.taskDescription || !this.dueDate) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Por favor, preencha todos os campos antes de editar a tarefa.',
+          });
+          return;
+        }
+        
         const response = await taskService.updateTask(this.taskId!, {
           title: this.taskName,
           description: this.taskDescription,
           due_date: this.dueDate,
+          completed: this.completed,
         });
-
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Tarefa editada com sucesso!',
+        });
         this.$router.push({ name: 'ProjectDetail', params: { id: this.projectId } });
       } catch (error) {
-        console.error('Erro ao editar tarefa:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro, por favor tenta novamente!',
+        });
       }
     }
   },

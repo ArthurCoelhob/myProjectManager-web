@@ -1,6 +1,5 @@
   <template>
     <div class="new-task-page">
-      <h2>Criar Nova Tarefa</h2>
       <NewTaskForm />
     </div>
   </template>

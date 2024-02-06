@@ -15,6 +15,10 @@
       <input type="date" id="dueDate" v-model="dueDate" />
     </div>
     <div class="form-group">
+        <label for="completed">Concluída:</label>
+        <input type="checkbox" id="completed" v-model="completed" />
+      </div>
+    <div class="form-group">
       <button @click.prevent="handleCreateTask">Criar Tarefa</button>
     </div>
   </form>
@@ -24,6 +28,8 @@
 import { defineComponent } from 'vue';
 import taskService from '@/services/taskService';
 import projectService from '@/services/projectService';
+import Swal from 'sweetalert2';
+
 import { format } from 'date-fns';
 
 export default defineComponent({
@@ -33,6 +39,7 @@ export default defineComponent({
       taskName: '',
       taskDescription: '',
       dueDate: '',
+      completed: false,
     };
   },
   async mounted() {
@@ -44,20 +51,36 @@ export default defineComponent({
     },
     async handleCreateTask() {
       try {
+        if (!this.taskName || !this.taskDescription || !this.dueDate) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Por favor, preencha todos os campos antes de criar a tarefa.',
+          });
+          return;
+        }
 
         const response = await taskService.createTask({
           title: this.taskName,
           description: this.taskDescription,
           due_date: this.dueDate,
-          completed: false,
+          completed: this.completed,
           projectId: this.projectId!,
         });
-
-        console.log('Tarefa criada com sucesso:', response.data);
+        
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Tarefa criada com sucesso!',
+        });
 
         this.$router.push({ name: 'ProjectDetail', params: { id: this.projectId } });
       } catch (error) {
-        console.error('Erro ao criar tarefa:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro, por favor tenta novamente!',
+        });
       }
     }
   },

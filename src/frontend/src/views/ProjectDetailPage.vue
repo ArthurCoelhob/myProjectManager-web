@@ -1,4 +1,3 @@
-<!-- ProjectDetailPage.vue -->
 <template>
   <div class="project-detail-page">
     <div>
@@ -15,6 +14,7 @@
 import ProjectDetail from '@/components/ProjectDetail.vue';
 import projectService from '@/services/projectService';
 import taskService from '@/services/taskService';
+import Swal from 'sweetalert2';
 
 export default {
   components: {
@@ -75,7 +75,11 @@ export default {
 
       try {
         await projectService.deleteProject(projectId);
-        console.log('Projeto excluído com sucesso');
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Projeto excluído com sucesso!',
+        });
 
         this.$router.push('/');
       } catch (error) {
