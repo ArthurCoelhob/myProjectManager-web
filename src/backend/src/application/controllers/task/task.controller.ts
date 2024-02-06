@@ -19,8 +19,20 @@ export class TaskController {
             throw new HttpException('Falha ao buscar as tarefas.', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    
+
+    @Get(':projectId/:id')
+    async getTaskById(
+        @Param('projectId') projectId: string,
+        @Param('id') id: string
+    ): Promise<Task> {
+        try {
+            const taskId = parseInt(id, 10);
+            return this.taskService.getTaskByIdAndProject(taskId, parseInt(projectId, 10));
+        } catch (error) {
+            throw new HttpException('Falha ao buscar a tarefa.', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @Post()
     async createTask(
         @Body() createTaskDto: CreateTaskDto

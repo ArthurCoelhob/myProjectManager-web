@@ -26,6 +26,18 @@ export class TaskService {
         }
     }
 
+    async getTaskByIdAndProject(taskId: number, projectId: number): Promise<Task> {
+        try {
+            const task = await this.taskRepository.findOneOrFail({
+                where: { id: taskId, project: { id: projectId } },
+            });
+
+            return task;
+        } catch (error) {
+            throw new NotFoundException('Tarefa não encontrada', error);
+        }
+    }
+
     async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
         try {
             console.log(createTaskDto)

@@ -1,0 +1,15 @@
+body {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .btn {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+  
